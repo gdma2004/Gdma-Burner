@@ -3,7 +3,7 @@ from os import path
 
 tamanho = os.get_terminal_size().columns
 
-print('YOUR PENDRIVE MUST BE FORMATTED'.center(tamanho, '-'))
+print(' YOUR PENDRIVE WILL BE FORMATTED AND ALL DATA WILL BE LOST '.center(tamanho, '!'))
 
 tree = str(input('\nShow your home files? (y/n)\n-> '))
 
@@ -24,6 +24,8 @@ if parameter_iso == True:
     parameter_pendrive = bool(path.exists(pathpendrivecompleto))
     
     if parameter_pendrive == True:
+        os.system('sudo umount {}'.format(pathpendrivecompleto))
+        os.system('sudo mkfs.ext4 {}'.format(pathpendrivecompleto))
         print('\nBurning...\n')
         os.system('sudo dd if={} of={} bs=4M'.format(pathisoinput, pathpendrivecompleto))
     else:
